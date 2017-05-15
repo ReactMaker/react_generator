@@ -28,7 +28,6 @@ export default class SettingBlock extends Component {
             parentIndex={idx}
             text={obj.text}
             content={obj.content}
-            // toggleButton={toggleButton}
           />
         ))}
       </div>

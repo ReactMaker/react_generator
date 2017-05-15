@@ -1,25 +1,15 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import Chip from 'material-ui/Chip';
+import { observer, inject, PropTypes as mobxPropTypes } from 'mobx-react';
 
-const styles = {
-  container: {
-    marginBottom: '30px'
-  },
-  title: {
-    margin: '10px'
-  },
-  button: {
-    display: 'inline-block',
-    margin: '5px'
-  },
-  clicked: {
-    backgroundColor: 'rgb(0, 188, 212)'
-  }
-};
+import './Feature.less';
 
+@inject('settingStore')
+@observer
 export default class Feature extends Component {
   static propTypes = {
+    settingStore: mobxPropTypes.object,
     parentIndex: PropTypes.number,
     text: PropTypes.string,
     content: PropTypes.object,
@@ -27,19 +17,20 @@ export default class Feature extends Component {
   }
 
   render() {
-    const { parentIndex, text, content, toggleButton } = this.props;
+    const { parentIndex, text, content } = this.props;
+    const { toggleButton } = this.props.settingStore;
 
     return (
-      <div style={styles.container}>
-        <p style={styles.title}>
+      <div className="feature_container">
+        <p className="title">
           {text}
         </p>
         <div>
-          {content.map((obj, index) => (
+          {content.map((obj, contentIndex) => (
             <Chip
-              key={`Chip_${index}`}
-              style={obj.clicked ? {...styles.button, ...styles.clicked} : styles.button}
-              onTouchTap={() => toggleButton({parentIndex, index})}
+              key={`Chip_${contentIndex}`}
+              className={obj.clicked ? 'btn clicked' : 'btn'}
+              onTouchTap={() => toggleButton(parentIndex, contentIndex)}
             >
               {obj.name}
             </Chip>

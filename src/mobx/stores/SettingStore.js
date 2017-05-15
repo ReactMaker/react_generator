@@ -14,21 +14,16 @@ class SettingStore {
           {name: 'componentDidUpdate', clicked: false},
           {name: 'componentWillUnmount', clicked: false}
       ]
-    }, {
-      text: 'React Router',
-      content: [
-          {name: 'Link', clicked: false}
-      ]
-    }, {
-      text: 'Redux',
-      content: [
-          {name: 'connect', clicked: false}
-      ]
     }
   ];
 
   @action setComponentName = (componentName) => {
     this.componentName = componentName;
+  }
+
+  @action toggleButton = (parentIndex, contentIndex) => {
+    const item = this.group[parentIndex].content[contentIndex];
+    item.clicked = !item.clicked;
   }
 }
 

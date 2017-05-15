@@ -15,23 +15,50 @@ export default class CodeBlock extends Component {
     Prism.highlightAll();
   }
 
+  getImportBlock = () => {
+    const importBlock = [`
+        import React, { Component } from 'react';`];
+
+    return `${importBlock}
+    `;
+  }
+
   getContent = () => {
-    const { componentName } = this.props.settingStore;
+    const { componentName, group } = this.props.settingStore;
+
+    const lifecycle = group[0].content
+      .filter(x => x.clicked)
+      .map(obj => (`
+          ${obj.name}() {
+            console.log('${obj.name}');
+          }
+      `));
 
     return `
         class ${componentName} extends Component {
-            constructor(props) {
-                super(props);
-            }
+          state = {
+            name: '${componentName}'
+          }
+          ${lifecycle.join('')}
+          render() {
+            const { componentName } = this.state;
 
-            render() {
-                return (
-                    <div>
-                        This is ${componentName}
-                    </div>
-                )
-            }
+            return (
+              <div>
+                <p>component: ${componentName}</p>
+                <p>state has name: { componentName }</p>
+              </div>
+            );
+          }
         }
+    `;
+  }
+
+  getExportBlock = () => {
+    const { componentName } = this.props.settingStore;
+
+    return `
+        export default ${componentName};
     `;
   }
 
@@ -40,7 +67,9 @@ export default class CodeBlock extends Component {
       <div>
         <pre key={new Date().getTime()}>
           <code className="language-javascript">
+            {this.getImportBlock()}
             {this.getContent()}
+            {this.getExportBlock()}
           </code>
         </pre>
       </div>
