@@ -4,7 +4,7 @@
 只要修改左側名稱及Lifecycle，右邊會即時顯示React程式碼
 讓您快速了解React程式結構
 
-[DEMO](https://reactmaker.github.io/react_generator/#/)
+[Demo](https://reactmaker.github.io/react_generator/#/)
 
 ## 特色
 
