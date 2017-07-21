@@ -46,7 +46,7 @@ export default class CodeBlock extends Component {
             return (
               <div>
                 <p>component: ${componentName}</p>
-                <p>state has name: { componentName }</p>
+                <p>state has componentName: { componentName }</p>
               </div>
             );
           }
