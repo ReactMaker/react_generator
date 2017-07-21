@@ -37,7 +37,7 @@ export default class CodeBlock extends Component {
     return `
         class ${componentName} extends Component {
           state = {
-            name: '${componentName}'
+            componentName: '${componentName}'
           }
           ${lifecycle.join('')}
           render() {
